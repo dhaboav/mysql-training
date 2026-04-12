@@ -4,8 +4,8 @@ from sqlalchemy import engine_from_config, pool
 from sqlmodel import SQLModel
 
 from alembic import context
-from core.config import settings
-from models.mahasiswa import Mahasiswa
+from app.core.config import settings
+from app.models.mahasiswa import Mahasiswa
 
 
 def get_url() -> str:
