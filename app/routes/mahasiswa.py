@@ -2,8 +2,9 @@ from fastapi import APIRouter, HTTPException
 from sqlmodel import select
 
 from app.core.db import SessionDep
-from app.models.mahasiswa import Mahasiswa, MahasiswaBase, MahasiswaUpdate
-from app.schemes import Message
+from app.models.mahasiswa import Mahasiswa
+from app.schemes.mahasiswa import MahasiswaCreate, MahasiswaUpdate
+from app.schemes.message import Message
 
 router = APIRouter(prefix="/mahasiswa", tags=["Mahasiswa"])
 
@@ -29,7 +30,9 @@ def get_mahasiswa_by_nim(session: SessionDep, NIM: str) -> Mahasiswa:
 
 
 @router.post("/", response_model=Message, status_code=201)
-def create_new_mahasiswa(session: SessionDep, mahasiswa_data: MahasiswaBase) -> Message:
+def create_new_mahasiswa(
+    session: SessionDep, mahasiswa_data: MahasiswaCreate
+) -> Message:
     """
     Endpoint to create a new mahasiswa entry.
 
@@ -80,7 +83,15 @@ def get_mahasiswa(session: SessionDep, NIM: str) -> Mahasiswa:
         Mahasiswa: Information about mahasiswa data from database.
     """
     mahasiswa_data = get_mahasiswa_by_nim(session, NIM)
-    return mahasiswa_data
+    return {
+        "NIM": mahasiswa_data.NIM,
+        "nama": mahasiswa_data.nama,
+        "sex": mahasiswa_data.sex,
+        "agama": mahasiswa_data.agama,
+        "angkatan": (
+            mahasiswa_data.academic_year.year if mahasiswa_data.academic_year else None
+        ),
+    }
 
 
 @router.patch("/{NIM}", response_model=Message)

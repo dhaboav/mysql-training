@@ -5,7 +5,7 @@ from sqlmodel import SQLModel
 
 from alembic import context
 from app.core.config import settings
-from app.models.mahasiswa import Mahasiswa
+from app.models import *
 
 
 def get_url() -> str:

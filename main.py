@@ -3,7 +3,7 @@ from fastapi.responses import RedirectResponse
 
 from app.core.config import settings
 from app.routes.mahasiswa import router
-from app.schemes import Message
+from app.schemes.message import Message
 
 app = FastAPI(title=settings.PROJECT_NAME)
 app.include_router(router)
