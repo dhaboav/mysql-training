@@ -24,7 +24,9 @@ class Mahasiswa(SQLModel, table=True):
     nama: str
     sex: SexsEnum
     agama: ReligionsEnum
-    angkatan: Optional[int] = Field(default=None, foreign_key="academic_year.id")
+    academic_year_id: Optional[int] = Field(
+        default=None, foreign_key="academic_year.id"
+    )
     created_at: datetime = Field(default_factory=get_datetime_utc)
     updated_at: datetime = Field(
         default_factory=get_datetime_utc,

@@ -10,6 +10,7 @@ from typing import Optional
 from sqlmodel import Field, SQLModel
 
 from app.models.enum import ReligionsEnum, SexsEnum
+from app.utils import get_current_year_utc
 
 
 class MahasiswaBase(SQLModel):
@@ -19,7 +20,7 @@ class MahasiswaBase(SQLModel):
     nama: str = Field(min_length=4)
     sex: SexsEnum
     agama: ReligionsEnum
-    angkatan: int
+    angkatan: int = Field(ge=1950, le=get_current_year_utc())
 
 
 class MahasiswaCreate(MahasiswaBase):
@@ -34,4 +35,4 @@ class MahasiswaUpdate(SQLModel):
     nama: Optional[str] = None
     sex: Optional[SexsEnum] = None
     agama: Optional[ReligionsEnum] = None
-    angkatan: Optional[int] = None
+    angkatan: Optional[int] = Field(default=None, ge=1950, le=get_current_year_utc())
