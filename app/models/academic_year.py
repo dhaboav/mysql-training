@@ -9,6 +9,7 @@ from sqlmodel import Field, Relationship, SQLModel
 
 if TYPE_CHECKING:
     from app.models.mahasiswa import Mahasiswa
+    from app.models.peminatan import Peminatan
 
 
 class AcademicYear(SQLModel, table=True):
@@ -21,3 +22,4 @@ class AcademicYear(SQLModel, table=True):
 
     # Relationships
     mahasiswa: List["Mahasiswa"] = Relationship(back_populates="academic_year")
+    peminatan: List["Peminatan"] = Relationship(back_populates="academic_year")

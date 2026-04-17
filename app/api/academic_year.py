@@ -16,13 +16,16 @@ from app.schemes import AcademicYearBase, Message
 router = APIRouter(prefix="/academicYear", tags=["Academic Year"])
 
 
-def get_academic_year_by_year(session: SessionDep, year: int) -> AcademicYear:
+def get_academic_year_by_year(
+    session: SessionDep, year: int, is_add: bool = False
+) -> AcademicYear:
     """
     Utility function to get academic year by year.
 
     Args:
         session (SessionDep): Database session dependency.
         year (int): Year of academic.
+        is_add (bool): Default is False, for adding new data.
 
     Return:
         AcademicYear: Information about academic year data from database.
@@ -32,7 +35,7 @@ def get_academic_year_by_year(session: SessionDep, year: int) -> AcademicYear:
     """
     stmt = select(AcademicYear).where(AcademicYear.year == year)
     is_valid = session.exec(stmt).first()
-    if not is_valid:
+    if not is_valid and not is_add:
         raise HTTPException(status_code=400, detail="Academic year not found")
 
     return is_valid
@@ -73,7 +76,7 @@ def add_new_academic_year(session: SessionDep, request: AcademicYearBase):
     Raises:
         HTTPException: HTTP 400 Bad Request if academic year already exists.
     """
-    is_year = get_academic_year_by_year(session, request.year)
+    is_year = get_academic_year_by_year(session, request.year, is_add=True)
     if is_year:
         raise HTTPException(
             status_code=400,

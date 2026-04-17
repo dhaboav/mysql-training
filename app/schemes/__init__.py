@@ -1,6 +1,7 @@
 from app.schemes.academic_year import AcademicYearBase
 from app.schemes.mahasiswa import MahasiswaBase, MahasiswaCreate, MahasiswaUpdate
 from app.schemes.message import Message
+from app.schemes.peminatan import PeminatanBase, PeminatanCreate, PeminatanUpdate
 
 __all__ = [
     "AcademicYearBase",
@@ -8,4 +9,7 @@ __all__ = [
     "MahasiswaCreate",
     "MahasiswaUpdate",
     "Message",
+    "PeminatanBase",
+    "PeminatanCreate",
+    "PeminatanUpdate",
 ]

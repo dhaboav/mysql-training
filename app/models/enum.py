@@ -8,6 +8,14 @@ class SexsEnum(str, Enum):
     P = "P"
 
 
+class JalurEnum(str, Enum):
+    """Enums for academic entry pathways"""
+
+    snbp = "SNBP"
+    snbt = "SNBT"
+    mandiri = "MANDIRI"
+
+
 class ReligionsEnum(str, Enum):
     """Enums for recognized religions in Indonesia"""
 
