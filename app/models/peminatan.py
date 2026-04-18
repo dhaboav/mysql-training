@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 class Peminatan(SQLModel, table=True):
-    """Model for database academic year table"""
+    """Model for database peminatan table"""
 
     __tablename__ = "peminatan"
 
