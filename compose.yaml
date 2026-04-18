@@ -1,0 +1,22 @@
+services:
+  backend:
+    image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
+    env_file:
+      - .env
+    environment:
+      - PROJECT_NAME=${PROJECT_NAME?Variable not set}
+      - MYSQL_USER=${MYSQL_USER?Variable not set}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD?Variable not set}
+      - MYSQL_HOST=${MYSQL_HOST?Variable not set}
+      - MYSQL_PORT=${MYSQL_PORT?Variable not set}
+      - MYSQL_DB=${MYSQL_DB?Variable not set}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthCheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"

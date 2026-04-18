@@ -1,0 +1,46 @@
+# Bytecode Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment (jangan masuk ke image)
+.venv/
+env/
+venv/
+
+# Environment variables
+.env
+.env.*
+
+# Git version control
+.git/
+.gitignore
+
+# Docker & Editor files
+Dockerfile
+.dockerignore
+compose.yaml
+*.log
+*.tmp
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.DS_Store
+
+# Test/coverage cache
+.pytest_cache/
+.tox/
+.nox/
+coverage.*
+htmlcov/
+
+# Database files (jika lokal pakai sqlite)
+*.sqlite3
+*.db
+
+# Project specific
+README.md
